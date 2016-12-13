@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const url = (process.env.DB_HOST || 'localhost:27017') + '/agencyDemoDB';
+const url = (process.env.DATABASE_HOST_PORT || 'localhost:27017') + '/agencyDemoDB';
 const db = require('monk')(url);
 
 const collection = db.get('grants');
