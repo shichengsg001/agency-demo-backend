@@ -1,0 +1,305 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "DARWIN API",
+        "description": "Various API exposed by DARWIN Backend",
+        "version": "1.0.0"
+    },
+    "host": "agency-backend.app.idahive.sg",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/user/list/{username}": {
+            "get": {
+                "summary": "List of Requests by user",
+                "description": "The User List Requests api returns a list of all requests made historically by the given user.\n",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "userId of requesting user",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "User API"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of requests",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Request"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/create": {
+            "post": {
+                "summary": "Create a request",
+                "description": "The Create Requests api allows users to submit requests and returns a 200 upon success.\n",
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Request Data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                ],
+                "tags": [
+                    "User API"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/grants/{id}": {
+            "delete": {
+                "summary": "Delete a request",
+                "description": "The Delete Requests api allows users to delete requests.\n",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of request",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "User API"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/ulist": {
+            "get": {
+                "summary": "Fetch list of requests pending approval",
+                "description": "The Unapproved List API allows admins to fetch a complete list of all requests pending approval.\n",
+                "tags": [
+                    "Admin API"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of requests",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Request"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/alist": {
+            "get": {
+                "summary": "Fetch list of approved requests",
+                "description": "The Approved List API allows admins to fetch a complete list of all approved requests.\n",
+                "tags": [
+                    "Admin API"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of requests",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Request"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/grants/{id}": {
+            "get": {
+                "summary": "Fetch a request",
+                "description": "The Admin Fetch Requests api allows admins to fetch the details of a particular request, by ID.\n",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of request",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Admin API"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A request object",
+                        "schema": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update a request",
+                "description": "The Admin Update Requests api allows admins to update a particular request, by ID. Used for approvals/rejections.\n",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of request",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Request Data",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Request"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Admin API"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deletion successful"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a request",
+                "description": "The Admin Delete Requests api allows admins to delete a particular request, by ID.\n",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of request",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Admin API"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deletion successful"
+                    },
+                    "500": {
+                        "description": "Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Request": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "description": "Unique identifier automatically generated by MongoDB"
+                },
+                "creator": {
+                    "type": "string",
+                    "description": "User ID of user that submitted the request."
+                },
+                "category": {
+                    "type": "string",
+                    "description": "Type of Product requested."
+                },
+                "amount": {
+                    "type": "integer",
+                    "description": "Number of Pax going for demo."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description/Remarks/Reasons for requesting demo."
+                },
+                "approval": {
+                    "type": "boolean",
+                    "description": "This attribute will be created by admin. Indicates whether request is not processed, approved or rejected."
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
