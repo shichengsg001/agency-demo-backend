@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-const username = process.env.DATABASE_USERNAME || 'agencyDemoUser';
-const password = process.env.DATABASE_PASSWORD || 'iloveida';
+//const username = process.env.DATABASE_USERNAME || 'agencyDemoUser';
+//const password = process.env.DATABASE_PASSWORD || 'iloveida';
 
 const url = (process.env.DATABASE_HOST_PORT || 'mongodb-nectar.idahive.sg:27017') + '/agencyDemoDB';
-const db = require('monk')(username + ':' + password +'@'+ url);
+const db = require('monk')(url);
 
 const collection = db.get('grants');
 
