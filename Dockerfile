@@ -1,6 +1,6 @@
 FROM mhart/alpine-node:6
 
-echo env
+RUN env
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
