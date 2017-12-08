@@ -1,7 +1,7 @@
 FROM mhart/alpine-node:6
 
-ARG testArg1 $test1
-ARG testArg2 $test2
+ARG test1
+ARG test2
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
