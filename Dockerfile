@@ -1,6 +1,7 @@
 FROM mhart/alpine-node:6
 
-RUN env
+RUN echo ${test1}
+RUN echo ${test2}
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
